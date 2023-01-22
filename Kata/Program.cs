@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections;
+using System.Diagnostics;
 
 class Program
 {
@@ -46,20 +47,27 @@ class Program
             else
             {
                 hashTable.Add(hash, cleanWord);
-            } 
+            }
         }
-        
+
+        var noSingles = new Dictionary<ulong, string>();
+
+        foreach (var potentialAnagram in hashTable)
+        {
+            if (!potentialAnagram.Value.Contains(',')) continue;
+            {
+                noSingles.Add(potentialAnagram.Key, potentialAnagram.Value);
+            }
+        }
+        //
         // var counter = 1;
-        // foreach (var pair in hashTable)
+        // foreach (var pair in noSingles)
         // {
-        //     if (pair.Value.Contains(','))
-        //     {
-        //         counter++;
-        //         Console.Write(counter);
-        //         Console.WriteLine(pair);
-        //     }
+        //     counter++;
+        //     Console.Write(counter);
+        //     Console.WriteLine(pair);
         // }
-        
+
         Console.WriteLine(stopwatch.ElapsedMilliseconds);
     }
 }
